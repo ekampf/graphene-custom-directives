@@ -12,12 +12,17 @@ Graphene Custom Directives
         :target: https://pypi.python.org/pypi/graphene-custom-directives
 
 
-Graphene Custom Directives
+A collection of custom GraphQL directives for (Graphene)[https://github.com/graphql-python/graphene]
 
 * Free software: BSD license
 * Documentation: https://graphene-custom-directives.readthedocs.org.
 
-Features
+Examples
 --------
 
-* TODO
+```
+query { 
+    input(value: "FOO BAR") @lowerCase
+} 
+// => { input: "foo bar" } 
+```
