@@ -21,8 +21,9 @@ Examples
 --------
 
 ```
-query { 
-    input(value: "FOO BAR") @lowerCase
-} 
-// => { input: "foo bar" } 
+    query { 
+        input(value: "FOO BAR") @lowerCase
+    } 
+    // => { input: "foo bar" } 
 ```
+
