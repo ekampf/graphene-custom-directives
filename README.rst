@@ -20,13 +20,11 @@ A collection of custom GraphQL directives for (Graphene)[https://github.com/grap
 Examples
 --------
 
-```
-
-query { 
-    input(value: "FOO BAR") @lowerCase
-} 
-// => { input: "foo bar" } 
-
-```
+.. code::
+    query { 
+        input(value: "FOO BAR") @lowerCase
+    } 
+    
+    // => { input: "foo bar" } 
 
 
