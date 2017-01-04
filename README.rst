@@ -21,6 +21,7 @@ Examples
 --------
 
 .. code:: graphql
+
     query { 
         input(value: "FOO BAR") @lowerCase
     } 
