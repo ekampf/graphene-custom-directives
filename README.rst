@@ -20,7 +20,7 @@ A collection of custom GraphQL directives for (Graphene)[https://github.com/grap
 Examples
 --------
 
-.. code::
+.. code:: graphql
     query { 
         input(value: "FOO BAR") @lowerCase
     } 
