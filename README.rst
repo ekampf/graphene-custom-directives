@@ -54,6 +54,16 @@ String formatting directives
     
     // => { input: "YEAH" } 
     
+* Base64 encode
+
+.. code:: graphql
+
+    query {
+        stringValue(value: "YES") @base64 
+    }
+
+    // => { input: "Tm9uZQ==" }
+
     
 * Uppercase:
 
