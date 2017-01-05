@@ -20,14 +20,14 @@ class PersonType(ObjectType):
     name = String()
     age = Int()
     none = String()
+    number = String()
 
 
 class QueryRoot(ObjectType):
     person = Field(PersonType)
 
     def resolve_person(self, *_):
-        return PersonType(name="Eran", age=15)
-
+        return PersonType(name="Eran", age=15, number="1314.15")
 
 
 class TestGrapheneCustomDirectives(unittest.TestCase):
@@ -43,6 +43,7 @@ class TestGrapheneCustomDirectives(unittest.TestCase):
                     name @lowercase
                     age
                     none @default(to: "YEAH")
+                    number @number(as: "0,.1f")
                 }
             }
         ''', middleware=[CustomDirectivesMiddleware()])
@@ -56,6 +57,7 @@ class TestGrapheneCustomDirectives(unittest.TestCase):
         self.assertEqual(person['name'], 'eran')
         self.assertEqual(person['age'], 15)
         self.assertEqual(person['none'], 'YEAH')
+        self.assertEqual(person['number'], '1,314.2')
 
 
     def tearDown(self):
