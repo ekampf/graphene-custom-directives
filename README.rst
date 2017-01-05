@@ -17,10 +17,45 @@ A collection of custom GraphQL directives for (Graphene)[https://github.com/grap
 * Free software: BSD license
 * Documentation: https://graphene-custom-directives.readthedocs.org.
 
+Number Formatting
+-----------------
 
+* Floor
+
+.. code:: graphql
+
+    query { 
+        stringValue(value: "3.14") @floor
+        floatValue(value: 3.14) @floor
+    } 
+    
+    // => { stringValue: "3.0", floatValue: 3.0 } 
+    
+* Ceil
+
+.. code:: graphql
+
+    query { 
+        stringValue(value: "3.14") @ceil
+        floatValue(value: 3.14) @ceil
+    } 
+    
+    // => { stringValue: "4.0", floatValue: 4.0 } 
 
 String formatting directives
 ----------------------------
+* Default value:
+
+.. code:: graphql
+
+    query { 
+        input @default(to: "YEAH")
+    } 
+    
+    // => { input: "YEAH" } 
+    
+    
+* Uppercase:
 
 .. code:: graphql
 
@@ -30,6 +65,8 @@ String formatting directives
     
     // => { input: "foo bar" } 
 
+* Lowercase:
+
 .. code:: graphql
 
     query { 
@@ -37,7 +74,9 @@ String formatting directives
     } 
     
     // => { input: "FOO BAR" } 
-    
+
+* Capitalize:
+
 .. code:: graphql
 
     query { 
@@ -46,14 +85,35 @@ String formatting directives
     
     // => { input: "Foo Bar" } 
     
- 
-Misc.
------
+* Number formatting
 
 .. code:: graphql
 
     query { 
-        input @default(to: "YEAH")
-    } 
+        stringValue(value: "3.14") @number(as: "0.4f") 
+    }
     
-    // => { input: "YEAH" } 
+    // => { stringValue: "3.1400" } 
+
+* Currency formatting
+
+.. code:: graphql
+
+    query { 
+        stringValue(value: "150000") @currency
+    }
+    
+    // => { stringValue: "$150,000" } 
+
+Misc.
+-----
+
+You can also use multiple directives, executed from left to right:
+
+.. code:: graphql
+
+    query { 
+        stringValue(value: "3.14") @ceil @number(as: "0.4f") 
+    }
+    
+    // => { stringValue: "4.0000" } 
