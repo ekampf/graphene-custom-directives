@@ -62,7 +62,7 @@ String formatting directives
         stringValue(value: "YES") @base64 
     }
 
-    // => { input: "Tm9uZQ==" }
+    // => { stringValue: "Tm9uZQ==" }
 
     
 * Uppercase:
