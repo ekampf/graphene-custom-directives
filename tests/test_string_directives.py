@@ -36,19 +36,26 @@ class TestStringDirectives(unittest.TestCase):
         result = self.__execute('{ stringValue(value: "NO") @default(to: "YES") }')
         self.assertEqual(result.data['stringValue'], 'NO')
 
-    def testNumber_formatsANumberString(self):
+    def testNumber(self):
         result = self.__execute('{ stringValue(value: "1345.16") @number(as: "0,.1f")}')
         self.assertEqual(result.data['stringValue'], '1,345.2')
 
-    def testLowercase_formatsANumberString(self):
+    def testCurrency(self):
+        result = self.__execute('{ stringValue(value: "1345.16") @currency }')
+        self.assertEqual(result.data['stringValue'], '$1,345.16')
+
+        result = self.__execute('{ stringValue(value: "1345.16") @currency(symbol: "E") }')
+        self.assertEqual(result.data['stringValue'], 'E1,345.16')
+
+    def testLowercase(self):
         result = self.__execute('{ stringValue(value: "FOO BAR") @lowercase }')
         self.assertEqual(result.data['stringValue'], 'foo bar')
 
-    def testUppercase_formatsANumberString(self):
+    def testUppercase(self):
         result = self.__execute('{ stringValue(value: "Foo Bar") @uppercase }')
         self.assertEqual(result.data['stringValue'], 'FOO BAR')
 
-    def testCapitalize_formatsANumberString(self):
+    def testCapitalize(self):
         result = self.__execute('{ stringValue(value: "FOO BaR") @capitalize }')
         self.assertEqual(result.data['stringValue'], 'Foo bar')
 

@@ -46,6 +46,24 @@ class NumberDirective(BaseCustomDirective):
         return format(float(value or 0), as_argument.value.value)
 
 
+class CurrencyDirective(BaseCustomDirective):
+    @staticmethod
+    def get_args():
+        return {
+            'symbol': GraphQLArgument(
+                type=GraphQLString,
+                description='Currency symbol (default: $)',
+            ),
+        }
+
+    @staticmethod
+    def process(value, directive, root, args, context, info):
+        symbol_argument = next((arg for arg in directive.arguments if arg.name.value == 'symbol'), None)
+        symbol = symbol_argument.value.value if symbol_argument else '$'
+        # '${:,.2f}'.format(1234.5)
+        return symbol + format(float(value or 0), ',.2f')
+
+
 class LowercaseDirective(BaseCustomDirective):
     """
     Lowercases result.
