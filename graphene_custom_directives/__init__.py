@@ -6,9 +6,9 @@ __author__ = 'Eran Kampf'
 __email__ = 'eran@ekampf.com'
 __version__ = '0.1.0'
 
-import string
-import number
-import list
+from .string import *
+from .number import *
+from .list import *
 from .middleware import CustomDirectivesMiddleware, CustomDirectiveMeta
 
 __ALL__ = [
