@@ -12,12 +12,48 @@ Graphene Custom Directives
         :target: https://pypi.python.org/pypi/graphene-custom-directives
 
 
-Graphene Custom Directives
+A collection of custom GraphQL directives for (Graphene)[https://github.com/graphql-python/graphene]
 
 * Free software: BSD license
 * Documentation: https://graphene-custom-directives.readthedocs.org.
 
-Features
---------
 
-* TODO
+
+String formatting directives
+----------------------------
+
+.. code:: graphql
+
+    query { 
+        input(value: "FOO BAR") @lowercase
+    } 
+    
+    // => { input: "foo bar" } 
+
+.. code:: graphql
+
+    query { 
+        input(value: "foo BAR") @uppercase
+    } 
+    
+    // => { input: "FOO BAR" } 
+    
+.. code:: graphql
+
+    query { 
+        input(value: "foo BAR") @capitalize
+    } 
+    
+    // => { input: "Foo Bar" } 
+    
+ 
+Misc.
+-----
+
+.. code:: graphql
+
+    query { 
+        input @default(to: "YEAH")
+    } 
+    
+    // => { input: "YEAH" } 
