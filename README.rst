@@ -17,15 +17,43 @@ A collection of custom GraphQL directives for (Graphene)[https://github.com/grap
 * Free software: BSD license
 * Documentation: https://graphene-custom-directives.readthedocs.org.
 
-Examples
---------
+
+
+String formatting directives
+----------------------------
 
 .. code:: graphql
 
     query { 
-        input(value: "FOO BAR") @lowerCase
+        input(value: "FOO BAR") @lowercase
     } 
     
     // => { input: "foo bar" } 
 
+.. code:: graphql
 
+    query { 
+        input(value: "foo BAR") @uppercase
+    } 
+    
+    // => { input: "FOO BAR" } 
+    
+.. code:: graphql
+
+    query { 
+        input(value: "foo BAR") @capitalize
+    } 
+    
+    // => { input: "Foo Bar" } 
+    
+ 
+Misc.
+-----
+
+.. code:: graphql
+
+    query { 
+        input @default(to: "YEAH")
+    } 
+    
+    // => { input: "YEAH" } 
