@@ -1,3 +1,4 @@
+import base64
 from graphql import GraphQLArgument, GraphQLNonNull, GraphQLString
 from graphene_custom_directives.middleware import BaseCustomDirective
 
@@ -25,6 +26,12 @@ class DefaultDirective(BaseCustomDirective):
             return to_argument.value.value
 
         return value
+
+
+class Base64Directive(BaseCustomDirective):
+    @staticmethod
+    def process(value, directive, root, args, context, info):
+        return base64.urlsafe_b64encode(str(value)) if value is not None else None
 
 
 class NumberDirective(BaseCustomDirective):

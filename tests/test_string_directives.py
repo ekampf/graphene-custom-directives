@@ -36,6 +36,13 @@ class TestStringDirectives(unittest.TestCase):
         result = self.__execute('{ stringValue(value: "NO") @default(to: "YES") }')
         self.assertEqual(result.data['stringValue'], 'NO')
 
+    def testBase64(self):
+        result = self.__execute('{ stringValue @base64 }')
+        self.assertIsNone(result.data['stringValue'])
+
+        result = self.__execute('{ stringValue(value: "YES") @base64 }')
+        self.assertEqual(result.data['stringValue'], 'WUVT')
+
     def testNumber(self):
         result = self.__execute('{ stringValue(value: "1345.16") @number(as: "0,.1f")}')
         self.assertEqual(result.data['stringValue'], '1,345.2')
