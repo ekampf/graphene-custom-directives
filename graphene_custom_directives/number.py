@@ -16,3 +16,12 @@ class FloorDirective(BaseCustomDirective):
         return str(new_value) if info.return_type == GraphQLString else new_value
 
 
+class CeilDirective(BaseCustomDirective):
+    """
+    Ceils value. Supports both String and Float fields.
+    """
+    @staticmethod
+    def process(value, directive, root, args, context, info):
+        new_value = math.ceil(float(value))
+        return str(new_value) if info.return_type == GraphQLString else new_value
+

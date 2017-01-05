@@ -38,6 +38,13 @@ class TestNumberDirectives(unittest.TestCase):
         result = self.__execute('{ stringValue(value: "3.14") @floor @number(as: "0.0f") }')
         self.assertEqual(result.data['stringValue'], '3')
 
+    def testCeil_floatField_floorsValue(self):
+        result = self.__execute('{ floatValue(value: 3.14) @ceil }')
+        self.assertEqual(result.data['floatValue'], 4.0)
+
+    def testCeil_stringField_floorsValue(self):
+        result = self.__execute('{ stringValue(value: "3.14") @ceil @number(as: "0.4f") }')
+        self.assertEqual(result.data['stringValue'], '4.0000')
 
     def __execute(self, query):
         result = schema.execute(query, middleware=[CustomDirectivesMiddleware()])
