@@ -8,6 +8,7 @@ __version__ = '0.1.0'
 
 import string
 import number
+import list
 from .middleware import CustomDirectivesMiddleware, CustomDirectiveMeta
 
 __ALL__ = [
