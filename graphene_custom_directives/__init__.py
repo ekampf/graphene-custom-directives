@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from directives import string, list, numbers
+from .directives import string, list, numbers
 from .middleware import CustomDirectivesMiddleware, CustomDirectiveMeta
 
 __author__ = 'Eran Kampf'
