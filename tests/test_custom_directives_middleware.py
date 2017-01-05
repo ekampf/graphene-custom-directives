@@ -9,22 +9,24 @@ Tests for `graphene-custom-directives` module.
 """
 
 import graphene
-from graphene import ObjectType, Field, String
+from graphene import ObjectType, Field, String, Int
 
 import unittest
 
-from graphene_custom_directives import CustomDirectivesMiddleware, LowercaseDirective
+from graphene_custom_directives import CustomDirectivesMiddleware, CustomDirectiveMeta
 
 
 class PersonType(ObjectType):
     name = String()
+    age = Int()
+    none = String()
 
 
 class QueryRoot(ObjectType):
     person = Field(PersonType)
 
     def resolve_person(self, *_):
-        return PersonType(name="ErAn")
+        return PersonType(name="Eran", age=15)
 
 
 
@@ -34,11 +36,13 @@ class TestGrapheneCustomDirectives(unittest.TestCase):
         pass
 
     def test_something(self):
-        schema = graphene.Schema(query=QueryRoot, directives=[LowercaseDirective()])
+        schema = graphene.Schema(query=QueryRoot, directives=CustomDirectiveMeta.get_all_directives())
         result = schema.execute('''
             {
                 person {
                     name @lowercase
+                    age
+                    none @default(to: "YEAH")
                 }
             }
         ''', middleware=[CustomDirectivesMiddleware()])
@@ -50,6 +54,8 @@ class TestGrapheneCustomDirectives(unittest.TestCase):
 
         person = result.data['person']
         self.assertEqual(person['name'], 'eran')
+        self.assertEqual(person['age'], 15)
+        self.assertEqual(person['none'], 'YEAH')
 
 
     def tearDown(self):
