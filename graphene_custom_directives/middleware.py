@@ -4,6 +4,7 @@ from promise import Promise
 
 __author__ = 'ekampf'
 
+
 class CustomDirectivesMiddleware(object):
     def resolve(self, next, root, args, context, info):
         result = next(root, args, context, info)
@@ -17,9 +18,12 @@ class CustomDirectivesMiddleware(object):
         if not field.directives:
             return value
 
+        new_value = value
         for directive in field.directives:
             directive_class = CustomDirectiveMeta.REGISTRY[directive.name.value]
-            return directive_class.process(value, directive, root, args, context, info)
+            new_value = directive_class.process(new_value, directive, root, args, context, info)
+
+        return new_value
 
 
 class CustomDirectiveMeta(type):
