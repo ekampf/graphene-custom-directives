@@ -68,9 +68,5 @@ class TestStringDirectives(unittest.TestCase):
 
     def __execute(self, query):
         result = schema.execute(query, middleware=[CustomDirectivesMiddleware()])
-
-        if result.errors:
-            print result.errors
-
         self.assertFalse(bool(result.errors))
         return result
