@@ -1,4 +1,6 @@
 import base64
+import six
+
 from graphql import GraphQLArgument, GraphQLNonNull, GraphQLString
 from graphene_custom_directives.middleware import BaseCustomDirective
 
@@ -31,7 +33,11 @@ class DefaultDirective(BaseCustomDirective):
 class Base64Directive(BaseCustomDirective):
     @staticmethod
     def process(value, directive, root, args, context, info):
-        return base64.urlsafe_b64encode(str(value)) if value is not None else None
+        if not value:
+            return None
+
+        value = base64.urlsafe_b64encode(str(value).encode('ascii'))
+        return value.decode('ascii') if six.PY3 else value
 
 
 class NumberDirective(BaseCustomDirective):
@@ -77,7 +83,7 @@ class LowercaseDirective(BaseCustomDirective):
     """
     @staticmethod
     def process(value, directive, root, args, context, info):
-        value = value if isinstance(value, basestring) else str(value)
+        value = value if isinstance(value, six.string_types) else str(value)
         return value.lower()
 
 
@@ -88,7 +94,7 @@ class UppercaseDirective(BaseCustomDirective):
 
     @staticmethod
     def process(value, directive, root, args, context, info):
-        value = value if isinstance(value, basestring) else str(value)
+        value = value if isinstance(value, six.string_types) else str(value)
         return value.upper()
 
 
@@ -99,7 +105,7 @@ class CapitalizeDirective(BaseCustomDirective):
 
     @staticmethod
     def process(value, directive, root, args, context, info):
-        value = value if isinstance(value, basestring) else str(value)
+        value = value if isinstance(value, six.string_types) else str(value)
         return value.capitalize()
 
 

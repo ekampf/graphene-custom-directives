@@ -52,7 +52,8 @@ class PyTest(TestCommand):
         sys.exit(errcode)
 
 requirements = [
-    'graphene'
+    'graphene',
+    'six'
 ]
 
 test_requirements = [

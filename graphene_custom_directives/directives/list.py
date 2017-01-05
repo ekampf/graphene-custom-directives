@@ -28,5 +28,5 @@ class SampleDirective(BaseCustomDirective):
     @staticmethod
     def process(value, directive, root, args, context, info):
         k_argument = [arg for arg in directive.arguments if arg.name.value == 'k'][0]
-        k = long(k_argument.value.value)
+        k = int(k_argument.value.value)
         return random.sample(value, k) if value else value

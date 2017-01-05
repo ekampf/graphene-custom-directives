@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import six
 from graphql import DirectiveLocation, GraphQLDirective
 from promise import Promise
 
@@ -44,7 +45,7 @@ class CustomDirectiveMeta(type):
         return [d() for d in cls.REGISTRY.values()]
 
 
-class BaseCustomDirective(GraphQLDirective):
+class BaseCustomDirective(six.with_metaclass(CustomDirectiveMeta, GraphQLDirective)):
     __metaclass__ = CustomDirectiveMeta
 
     def __init__(self):
