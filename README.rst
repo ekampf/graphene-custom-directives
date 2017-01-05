@@ -115,6 +115,30 @@ String formatting directives
     
     // => { stringValue: "$150,000" } 
 
+List Directives
+---------------
+
+* Sample
+
+.. code:: graphql
+
+    query { 
+        listValue(value: [1, 2, 3]) @sample(k: 1)
+    }
+    
+    // => { listValue: [2] } 
+    
+* Shuffle
+
+.. code:: graphql
+
+    query { 
+        listValue(value: [1, 2, 3]) @shuffle
+    }
+    
+    // => { listValue: [2, 1, 3] } 
+
+
 Misc.
 -----
 
