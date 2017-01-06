@@ -3,12 +3,13 @@
 language: python
 
 python:
+  - "3.6"
   - "3.4"
   - "2.7"
   - "pypy"
 
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-install: 
+install:
   - pip install coveralls
   - pip install -r requirements.txt
 
